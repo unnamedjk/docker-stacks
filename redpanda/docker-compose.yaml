@@ -7,8 +7,8 @@ services:
       - --smp 1
       - --overprovisioned
       - --node-id 0
-      - --kafka-addr PLAINTEXT://$(curl http://169.254.169.254/latest/meta-data/private-ipv4):29092,OUTSIDE://$(curl http://169.254.169.254/latest/meta-data/public-ipv4):9092
-      - --advertise-kafka-addr PLAINTEXT://$(curl http://169.254.169.254/latest/meta-data/private-ipv4):29092,OUTSIDE://$(curl http://169.254.169.254/latest/meta-data/public-ipv4):9092
+      - --kafka-addr PLAINTEXT://$AWS_LOCAL_HOSTNAME:29092,OUTSIDE://$AWS_PUBLIC_HOSTNAME:9092
+      - --advertise-kafka-addr PLAINTEXT://$AWS_LOCAL_HOSTNAME:29092,OUTSIDE://$AWS_PUBLIC_HOSTNAME:9092
       - --pandaproxy-addr 0.0.0.0:8082
       - --advertise-pandaproxy-addr localhost:8082
       - --memory 8G
@@ -29,14 +29,14 @@ services:
       CONFIG_FILEPATH: /tmp/config.yml
       CONSOLE_CONFIG_FILE: |
         kafka:
-          brokers: ["$(curl http://169.254.169.254/latest/meta-data/private-ipv4):29092"]
+          brokers: ["$AWS_LOCAL_HOSTNAME:29092"]
           schemaRegistry:
             enabled: true
-            urls: ["http://$(curl http://169.254.169.254/latest/meta-data/private-ipv4):8081"]
+            urls: ["http://$AWS_LOCAL_HOSTNAME:8081"]
         redpanda:
           adminApi:
             enabled: true
-            urls: ["http://$(curl http://169.254.169.254/latest/meta-data/private-ipv4):9644"]
+            urls: ["http://$AWS_LOCAL_HOSTNAME:9644"]
         connect:
           enabled: true
           clusters:
@@ -69,7 +69,7 @@ services:
           offset.flush.interval.ms=1000
           producer.linger.ms=50
           producer.batch.size=131072
-      CONNECT_BOOTSTRAP_SERVERS: $(curl http://169.254.169.254/latest/meta-data/private-ipv4):29092
+      CONNECT_BOOTSTRAP_SERVERS: $AWS_LOCAL_HOSTNAME:29092
       CONNECT_GC_LOG_ENABLED: "false"
       CONNECT_HEAP_OPTS: -Xms1024M -Xmx1024M
       CONNECT_LOG_LEVEL: info
