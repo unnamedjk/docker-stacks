@@ -1,1 +1,0 @@
-FROM docker.redpanda.com/vectorized/redpanda:v22.3.8
