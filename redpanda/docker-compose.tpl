@@ -7,6 +7,7 @@ volumes:
   redpanda: null
 services:
   redpanda:
+    restart: always
     image: docker.redpanda.com/redpandadata/redpanda:v23.2.19
     command:
       - redpanda start
@@ -37,6 +38,7 @@ services:
       start_period: 5s
   console:
     image: docker.redpanda.com/redpandadata/console:v2.3.8
+    restart: always
     entrypoint: /bin/sh
     command: -c 'echo "$$CONSOLE_CONFIG_FILE" > /tmp/config.yml && echo "$$CONSOLE_ROLEBINDINGS_CONFIG_FILE" > /tmp/role-bindings.yml && /app/console'
     environment:
@@ -64,6 +66,7 @@ services:
       - redpanda
   connect:
     image: docker.redpanda.com/redpandadata/connectors:latest
+    restart: always
     hostname: connect
     container_name: connect
     networks:
