@@ -9,6 +9,7 @@ services:
   redpanda:
     restart: always
     image: docker.redpanda.com/redpandadata/redpanda:v23.2.19
+    env_file: .env
     command:
       - redpanda start
       - --smp 1
