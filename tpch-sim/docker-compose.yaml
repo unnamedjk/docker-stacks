@@ -1,0 +1,8 @@
+version: '3'
+services:
+  tpch-sim:
+    build: ./tpch-sim
+    env_file: ./.env
+    deploy:
+      replicas: 10
+      

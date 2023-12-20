@@ -1,0 +1,16 @@
+version: '3.1'
+services:
+  superset:
+    restart: unless-stopped
+    build:
+      context: ./
+    #environment:
+    #  ENABLE_DEV_MODE: 1
+    #  ADMIN_USERNAME: root
+    #  ADMIN_EMAIL: root@singlestore.labs
+    #  ADMIN_PASSWORD: SingleStore1!
+    #  MAPBOX_API_KEY: pk.eyJ1Ijoiamt1bnR6ODA1IiwiYSI6ImNrd3QxdDZmYjFjaWYydm84NG9sbGtoOHMifQ.5uBneFCvZeS_BdWshzQkmw
+    ports:
+      - 8088:8088
+    volumes:
+      - ./data:/app/superset_home
