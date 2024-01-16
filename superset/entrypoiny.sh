@@ -1,6 +1,6 @@
 #!/usr/bin/env /bin/bash
 INIT_DONE_FILE=/init.done
-pip3 install PyMySQL sqlalchemy-mongobi
+pip3 install PyMySQL sqlalchemy-mongobi sqlalchemy-singlestoredb
 superset fab create-admin \
             --username $ADMIN_USERNAME \
             --firstname Superset \

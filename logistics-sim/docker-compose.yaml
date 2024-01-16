@@ -1,7 +1,7 @@
 version: '3'
 services:
   logistics-sim:
-    build: ./logistics-sim
+    build: .
     deploy:
       replicas: 1
     environment:
