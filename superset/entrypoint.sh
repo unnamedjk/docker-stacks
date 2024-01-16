@@ -1,4 +1,5 @@
 #!/usr/bin/env /bin/bash
+export SUPERSET_SECRET_KEY="oh-so-secret"
 INIT_DONE_FILE=/init.done
 pip3 install PyMySQL sqlalchemy-mongobi sqlalchemy-singlestoredb
 superset fab create-admin \
