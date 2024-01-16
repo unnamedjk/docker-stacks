@@ -1,0 +1,8 @@
+version: '3'
+services:
+  logistics-sim:
+    build: ./logistics-sim
+    deploy:
+      replicas: 1
+    environment:
+      - SIMULATOR_ID=local
