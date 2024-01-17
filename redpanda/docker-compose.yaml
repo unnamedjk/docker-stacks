@@ -25,6 +25,10 @@ services:
       timeout: 3s
       retries: 5
       start_period: 5s
+    deploy:
+      resources:
+        limits:
+          memory: 28G
   console:
     image: docker.redpanda.com/redpandadata/console:v2.3.8
     restart: always
