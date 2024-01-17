@@ -13,9 +13,9 @@ echo "Starting public redpanda..."
 --advertise-rpc-addr redpanda:33145 \
 --mode dev-container
 
-echo "Finalizing topic configuration..."
-/usr/bin/rpk topic delete tpch packages transitions
-/usr/bin/rpk topic create -r 1 -p 16 -c cleanup.policy=delete -c  log_retention_ms=3600000 tpch packages transitions
+#echo "Finalizing topic configuration..."
+#/usr/bin/rpk topic delete tpch packages transitions
+#/usr/bin/rpk topic create -r 1 -p 16 -c cleanup.policy=delete -c  log_retention_ms=3600000 tpch packages transitions
 
-echo "Stopping local redpanda..."
-/usr/bin/rpk redpanda stop
+#echo "Stopping local redpanda..."
+#/usr/bin/rpk redpanda stop
