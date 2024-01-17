@@ -1,6 +1,10 @@
 #! /usr/bin/env /bin/bash
 set -x
 echo "Starting public redpanda..."
+total_mem_k=$(grep MemTotal /proc/meminfo | awk '{print $2}')
+eighty_percent_mem_gb=$(echo "scale=2; $total_mem_k / 1024 / 1024 * 0.80" | bc)
+MEM_80_PERCENT_GB=$eighty_percent_mem_gb
+
 /usr/bin/rpk redpanda start \
 --smp 1 \
 --overprovisioned \
@@ -12,10 +16,10 @@ echo "Starting public redpanda..."
 --rpc-addr redpanda:33145 \
 --advertise-rpc-addr redpanda:33145 \
 --mode dev-container
-
+--memory ${MEM_80_PERCENT_GB}G
 #echo "Finalizing topic configuration..."
 #/usr/bin/rpk topic delete tpch packages transitions
 #/usr/bin/rpk topic create -r 1 -p 16 -c cleanup.policy=delete -c  log_retention_ms=3600000 tpch packages transitions
 
 #echo "Stopping local redpanda..."
-#/usr/bin/rpk redpanda stop
+/usr/bin/rpk redpanda stop
